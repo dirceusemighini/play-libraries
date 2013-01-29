@@ -1,5 +1,5 @@
 package fly.play.utils.oauth
-import play.api.libs.concurrent.Promise
+//import play.api.libs.concurrent.Promise
 import java.net.URLEncoder
 import play.api.mvc.Codec
 import fly.play.utils.PlayUtils._
@@ -8,6 +8,7 @@ import play.api.mvc.Call
 import play.api.mvc.RequestHeader
 import OAuth2Constants._
 import play.api.Logger
+import concurrent.Future
 
 case class OAuth2(
   val api: OAuth2Api,
@@ -20,7 +21,7 @@ case class OAuth2(
   "&" + REDIRECT_URI + "="
 
   //TODO include expires
-  def getAccessToken(code: String, scope: Option[String] = None)(implicit codec: Codec, request: RequestHeader): Promise[String] = {
+  def getAccessToken(code: String, scope: Option[String] = None)(implicit codec: Codec, request: RequestHeader): Future[String] = {
     val url = getAccessTokenUrl(code, scope)
     Logger.info("Requesting access token with url: " + url)
     ws(url) { response =>

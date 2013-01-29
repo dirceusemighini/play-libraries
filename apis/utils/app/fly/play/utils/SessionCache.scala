@@ -13,6 +13,7 @@ import play.api.libs.concurrent.Akka
 import play.api.Play.current
 import play.api.mvc.Cookie
 import play.api.mvc.BodyParser
+import scala.concurrent.ExecutionContext.Implicits.global
 
 object SessionCache {
   private val COOKIE_NAME = "sessionCacheId"
